@@ -1,0 +1,135 @@
+{% extends "activitylog_app/base.html" %}
+{% load static %}
+<!-- checks in template folder of activitylog_app -->
+{% block title %} list of all comments {% endblock %}
+{% block content %}
+<!-- Displays the current date and/or time -->
+{% now "jS F Y H:i:s" %}
+<h1>list starts here</h1>
+<!-- always use get_absolute_url instead of self.id etc -->
+{# {% endblock %} #}
+
+
+<p>heading line no 15</p>
+{% block heading %}{{heading}}{% endblock %}
+
+{# {% block content %} #}
+
+<!-- <div class="row m-0 p-0" style="font-size: 0.9rem;"> -->
+<div class=" col m-0 p-0 card  form-control " id="filter">
+	<form method="get">
+		{{myFilter.form}}
+    <small id="id_start_date" class="form-text text-muted">
+      Enter date as DD/MM/YYYY
+    </small>
+    <button class="btn btn-primary" type="submit"> Search</button>
+	</form>
+</div>
+<br>
+
+<div class="table-responsive mt-3   text-center">
+    <!-- table id="datatablesSimple"  for theme table and search-->
+<table id="datatablesSimple1" class= "table table-striped table-hover table-bordered align-middle ">
+  <thead class="table-success  align-middle ">
+    <tr>    
+      <!-- <th scope="col">Ticket Number <br> <u><i>click to edit</i></u></th> -->
+      <th scope="col">Reported<br>Date<br><u><i>click to edit</i></u></th>
+      <!-- <th scope="col">Time</th> -->
+      <th scope="col">Satellite / Subsystem<br></th>
+      <th scope="col">Details</th>
+      <!-- <th scope="col">Priority</th> -->
+      <th scope="col">Full Details <br> <u><i>click to view</i></u></th>
+      <th scope="col">Attachment status <br> <u><i>click to view</i></u></th>
+    </tr>
+  </thead>
+
+  {% for comment in comment %}
+  <tbody class=" text-justify text-wrap">
+    <tr>  
+    {# <td scope="row"><a href="{%url "activitylog_app:update_post" comment.pk %}" > {{ comment.ticket|wordwrap:1 }} {{comment.user}}</a> </td> #}
+      <td scope="row" class="text-uppercase"><a href="{{ comment.get_absolute_url }}"> {{ comment.date_time }}</a> </td> 
+      {#<td scope="row" class="text-uppercase"><a href="{{ comment.get_absolute_url }}"> {{ comment.date }} <br> {{comment.time}}</a> </td>  #}
+      <td scope="row">{{comment.satellite}} /   <br>{{comment.subsystem_type}} </td>
+      <td scope="row" style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 4; /* number of lines to show:4 ,display: -webkit-box; */;-webkit-box-orient: vertical;">
+        {{comment.details|truncatechars:390|linebreaks}}</td>
+      <!-- wordwrap¶ Wraps words at specified line length. Argument: number of characters at which to wrap the text -->
+      <td scope="row"class="p-0" >
+      {% if comment.photo %}
+<a href="{{ comment.get_absolute_url }}"><img src="{{ comment.photo.url }}" alt="Img not available" style="max-height: 102px"  class="img-thumbnail" ></a> 
+   <!-- style="width: 100%; float: left; margin-right: 10px;padding: 0%;"/></a>  -->
+<!-- <br>Size: {{comment.photo.size|filesizeformat}} -->
+{% else %}
+<img src="{% static 'images/alt1.jpg' %}" alt="No image available" style="max-height: 102px"  class="img-responsive"  style="width: 100%; float: left; margin-right: 10px;padding: 0%;">
+{% endif %} 
+</td>
+
+<td scope="row" style="word-wrap:break-word;">
+{% if comment.upload %}
+
+    <!-- <h4><li class="mx-2 px-2" > -->
+    <a href="{{ comment.upload.url }}" target="_blank ">
+      {{comment.upload.name|wordwrap:5|linebreaks|stringformat:".30s"}}
+      <!-- {{comment.upload.name|wordwrap:5|linebreaks|stringformat:".20s"|truncatewords:30}} -->
+      <!-- <div class="fst-italic">.....Click to open</div>  -->
+    </a>
+  <!-- </li> -->
+    <div class="m-2 p-2">File Size: {{comment.upload.size|filesizeformat}}</div>
+  </h4>
+  </div>
+</td>
+{% endif %} 
+
+
+
+
+<!-- <td scope="row" >{% if comment.upload %}
+<a href="{{ comment.upload.url }}" download   target="_blank">Doc Size: {{comment.upload.size|filesizeformat}}</a>
+ {% endif %} </td> -->
+
+ {% comment %}<td scope="row"><a href="{%url "xpndr:comment_detail" comment.pk %}" >Details</a></td>{% endcomment %}
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+</div>
+ {% comment %} {% for comment in comment %}
+<h2>
+  <a href="{{ comment.get_absolute_url }}"> {{ comment.satellite }} </a>
+</h2>
+{% if comment.upload %}
+<img
+  src="{{ comment.upload.url }}"
+  alt="connect"
+  style="max-height: 300px"
+  class="img-responsive"
+  style="width: 100%; float: left; margin-right: 10px"
+/>
+{% endif %} {% endcomment %}
+{% comment %} 
+ {% if comment.upload %}
+<a href="{{ comment.upload.url }}" target="_blank ">
+  {{comment.upload.name}} size: {{comment.upload.size|filesizeformat}}bytes
+  Click to open
+</a>
+ {% endif %} 
+ {% endcomment %}
+
+
+
+
+  {% comment %} <form method="post" action="{% url 'xpndr:comment_delete' comment.pk %}"> 
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+  </form>
+  {% endcomment %}
+
+  {% comment %} <p class="date">
+    Satellite {{ comment.satellite }} by {{ comment.transponder}}...{{comment.body}}
+  </p>
+  {{ comment.body|truncatewords:30|linebreaks }} {% endcomment %}
+
+    {% comment %} {%
+  include "pagination.html" with page=page_obj %} {% endcomment %}
+   {% endblock  %}
+
+{% comment %} {% endblock %} {% endcomment %}

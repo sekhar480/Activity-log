@@ -1,0 +1,20 @@
+{% extends "activitylog_app/base.html" %}
+
+{% block content %}
+
+<h1>New Post Form</h1>
+<br/><br/>
+<div class="container">
+<div class="form-group m-3">
+    <form method="post"  enctype="multipart/form-data"> 
+    {{form.as_p}} 
+    {% csrf_token %}
+    <input type="submit" value="Add comment" >
+    </form>
+    </div>
+</div>
+
+
+{% endblock %}
+
+

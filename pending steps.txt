@@ -1,0 +1,17 @@
+develop log view
+change media path in settings
+djagno forms
+html table
+sqlalchemy
+django-filter
+
+
+main page ...attachment available
+image thumbnail width bootstrap
+
+
+FORM DATE TIME
+MULTIPLE FILE
+NEW FORM REROUTE POST FORM FILL
+FRONT PAGE TABLE WIDTH
+

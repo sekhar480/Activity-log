@@ -13,6 +13,27 @@
 <button class="btn btn-secondary">Update</button>
 {% comment %} <input type="submit" value="Add comment" > {% endcomment %}
 </form>
+<br>
+<p class="h5 text-primary">Current uploaded photo :</p>
+
+{% if comment.photo %}
+<a href="{{ comment.get_absolute_url }}"><img src="{{ comment.photo.url }}" alt="Img not available" style="max-height: 300px"  class="img-thumbnail" ></a> 
+{% endif %}
+
+
+<p class="h5 text-primary">Current uploaded photo :</p>
+{% if comment.upload %}
+    <h3  class="mx-2 px-2 text-info"><p>Uploaded files: </p></h3>
+    <h4><li class="mx-2 px-2" >
+    <a href="{{ comment.upload.url }}" target="_blank ">
+      {{comment.upload.name}}
+      <!-- <div class="fst-italic">.....Click to open</div>  -->
+    </a></li>
+    <div class="m-2 p-2">File Size: {{comment.upload.size|filesizeformat}}</div>
+  </h4>
+  </div>
+{% endif %} 
+
 </div>
 </div>
 

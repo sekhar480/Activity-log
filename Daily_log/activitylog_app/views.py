@@ -54,4 +54,4 @@ def update_comment(request,pk):
         print("get method")
         form = CommentForm(instance=comment)  # new form to the user
 
-    return render(request,'activitylog_app/comment/update_post.html',{'form':form})   
+    return render(request,'activitylog_app/comment/update_post.html',{'form':form,'comment':comment})   

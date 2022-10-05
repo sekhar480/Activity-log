@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Comment
 from .forms import  CommentForm
+from .filters import CommentFilter
 # from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
@@ -8,7 +9,9 @@ from .forms import  CommentForm
 def comment_list(request):
     comment = Comment.objects.all().order_by('date_time__year','date_time__month','date_time__day','date_time__hour','date_time__minute')
     # comment = Comment.objects.all().order_by('date','time')
-    return render(request,'activitylog_app/comment/list.html',{'comment': comment})
+    myFilter=CommentFilter(request.GET,queryset=comment)
+    comment=myFilter.qs
+    return render(request,'activitylog_app/comment/list.html',{'comment': comment,'myFilter':myFilter})
 
 #full detail of comment post
 def comment_detail(request,pk):
@@ -54,4 +57,4 @@ def update_comment(request,pk):
         print("get method")
         form = CommentForm(instance=comment)  # new form to the user
 
-    return render(request,'activitylog_app/comment/update_post.html',{'form':form,'comment':comment})   
+    return render(request,'activitylog_app/comment/update_comment.html',{'form':form,'comment':comment})   

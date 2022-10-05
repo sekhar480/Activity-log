@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'activitylog_app.apps.ActivitylogAppConfig'
+    'activitylog_app.apps.ActivitylogAppConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

@@ -16,11 +16,11 @@
 {# {% block content %} #}
 
 <!-- <div class="row m-0 p-0" style="font-size: 0.9rem;"> -->
-<div class=" col m-0 p-0 card  form-control " id="filter">
+<div class=" col m-2  card  form-control " id="filter">
 	<form method="get">
 		{{myFilter.form}}
     <small id="id_start_date" class="form-text text-muted">
-      Enter date as DD/MM/YYYY
+      Enter date as DD/MM/YYYY HH:MM:SS
     </small>
     <button class="btn btn-primary" type="submit"> Search</button>
 	</form>
@@ -46,8 +46,8 @@
   {% for comment in comment %}
   <tbody class=" text-justify text-wrap">
     <tr>  
-    {# <td scope="row"><a href="{%url "activitylog_app:update_post" comment.pk %}" > {{ comment.ticket|wordwrap:1 }} {{comment.user}}</a> </td> #}
-      <td scope="row" class="text-uppercase"><a href="{{ comment.get_absolute_url }}"> {{ comment.date_time }}</a> </td> 
+    {# <td scope="row"><a href="{%url "activitylog_app:update_comment" comment.pk %}" > {{ comment.ticket|wordwrap:1 }} {{comment.user}}</a> </td> #}
+      <td scope="row" class="text-uppercase"><a href="{%url 'activitylog_app:update_comment' comment.pk %}"> {{ comment.date_time }}</a> </td> 
       {#<td scope="row" class="text-uppercase"><a href="{{ comment.get_absolute_url }}"> {{ comment.date }} <br> {{comment.time}}</a> </td>  #}
       <td scope="row">{{comment.satellite}} /   <br>{{comment.subsystem_type}} </td>
       <td scope="row" style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 4; /* number of lines to show:4 ,display: -webkit-box; */;-webkit-box-orient: vertical;">

@@ -14,15 +14,19 @@
 {% comment %} <input type="submit" value="Add comment" > {% endcomment %}
 </form>
 <br>
-<p class="h5 text-primary">Current uploaded photo :</p>
+
 
 {% if comment.photo %}
+<p class="h5 text-primary">Current uploaded photo :</p>
 <a href="{{ comment.get_absolute_url }}"><img src="{{ comment.photo.url }}" alt="Img not available" style="max-height: 300px"  class="img-thumbnail" ></a> 
+{% else %}
+<p class="h5 text-primary">No photo uploaded</p>
 {% endif %}
 
+<br>
 
-<p class="h5 text-primary">Current uploaded photo :</p>
 {% if comment.upload %}
+<p class="h5 text-primary">Current uploaded photo :</p>
     <h3  class="mx-2 px-2 text-info"><p>Uploaded files: </p></h3>
     <h4><li class="mx-2 px-2" >
     <a href="{{ comment.upload.url }}" target="_blank ">
@@ -31,11 +35,13 @@
     </a></li>
     <div class="m-2 p-2">File Size: {{comment.upload.size|filesizeformat}}</div>
   </h4>
-  </div>
+{% else %}
+<p class="h5 text-secondary">No File uploaded</p>
 {% endif %} 
 
 </div>
 </div>
+
 
 
 

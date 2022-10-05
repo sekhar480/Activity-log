@@ -13,9 +13,9 @@ class CommentForm(forms.ModelForm):
             'subsystem_type':forms.Select(attrs={'class':'form-select w-50'}),
             'details':forms.Textarea(attrs={'class':'form-control'}),
             # 'detail':forms.TextInput(attrs={'class':'form-group1 form-control','id':'exampleFormControlTextarea1' ,'rows':'3'}),
-            'photo':forms.FileInput(),
+            # 'photo':forms.FileInput(),
             # 'photo':forms.FileInput(attrs={'class':'form-control w-50'}),
-            'upload':forms.FileInput(attrs={'class':'form-control w-50','type':'file'}),
+            # 'upload':forms.FileInput(attrs={'class':'form-control w-50','type':'file'}),
             # file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
             }
         # localized_fields = ('date_time',)

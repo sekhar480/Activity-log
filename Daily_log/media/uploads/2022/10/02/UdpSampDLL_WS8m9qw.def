@@ -1,0 +1,10 @@
+; UdpSampDLL.def : Declares the module parameters for the DLL.
+
+LIBRARY      "UdpSampDLL"
+DESCRIPTION  'UdpSampDLL Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+    start_acq
+    stop_acq
+    udp_getData

@@ -18,7 +18,6 @@ class Comment(models.Model):
     #IF user is deleted all the comments by user is deleted
 
     #Ticket generation part
-    # date=models.DateField() 
     # date=models.DateField(default=timezone.localdate) # USE_TZ  for UTC
     # time=models.TimeField(verbose_name="Time (HH:MM:SS)",null=True,blank=True )
     date_time=models.DateTimeField(default=timezone.now,editable=True,null=True,blank=True )
